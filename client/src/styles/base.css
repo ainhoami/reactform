@@ -27,10 +27,7 @@ html {
 
 .bgimage {
   /* background-attachment: fixed; */
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  /* background: rgb(2, 0, 36); */
+
   background: linear-gradient(
     90deg,
     rgba(2, 0, 36, 1) 0%,
@@ -38,18 +35,34 @@ html {
     rgba(68, 0, 255, 1) 100%
   );
   background-attachment: fixed;
-  background-image: 
-  linear-gradient(
+  background-image: linear-gradient(
       90deg,
       rgba(218, 20, 168, 0.15) 0%,
       rgba(219, 89, 158, 0.246) 0%,
       rgba(236, 31, 185, 0.087) 0%
     ),
     url("../assets/bg.jpg");
+  background-position: center;
+  background-size: cover;
+
+  /* background-repeat: no-repeat; */
   overflow: scroll;
   height: 100%;
 }
+.text-purple {
+  color: purple;
+}
+p {
+  font-size: 17px;
+}
+p span.text-purple {
+  color: rgb(153, 16, 153);
+  font-weight: bolder;
+}
 
+.line-purple {
+  background-color: rgba(245, 105, 245, 0.698);
+}
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;

@@ -1,23 +1,24 @@
-
 .error {
   color: red;
   font-size: 20px;
 }
 
-.btn-purple{
+.btn-purple {
   background-color: rgba(202, 28, 202, 0.671);
-  color:white;
+  color: white;
 }
 
 div.container.ct2 {
-  opacity:0.96!important;
-
+  opacity: 0.96 !important;
 }
 
-.was-validated{
-  color:#212529;
-}
-.form-check-input.is-valid~.form-check-label, .was-validated .form-check-input:valid~.form-check-label, .form-control.is-valid, .was-validated .form-control:valid  {
+.was-validated {
   color: #212529;
-  background-image:none;
+}
+.form-check-input.is-valid ~ .form-check-label,
+.was-validated .form-check-input:valid ~ .form-check-label,
+.form-control.is-valid,
+.was-validated .form-control:valid {
+  color: #212529;
+  background-image: none;
 }

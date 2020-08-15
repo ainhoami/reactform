@@ -9,6 +9,7 @@ import "../styles/form.css"
 
 import Form from "./Form"
 import Thanks from "./Thanks"
+import Requests from "./Requests"
 
 library.add(fab, faCheckSquare, faCoffee, faArrowCircleRight)
 
@@ -18,6 +19,7 @@ export default function App() {
     <Router>
       <Route exact path="/" component={Form} />
       <Route exact path="/thx" component={Thanks} />
+      <Route exact path="/super-secret-url/requests" component={Requests} />
     </Router>
   )
 }

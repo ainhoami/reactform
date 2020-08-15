@@ -1,8 +1,4 @@
 import React, { useState } from "react";
-import { Redirect } from "react-router-dom";
-// import { useAdmins} from '../hooks'
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import validator from "validator";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
@@ -10,6 +6,8 @@ import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import Dropdown from "react-bootstrap/Dropdown";
+
+import { useTrainerrequest } from "../hooks";
 
 export default (props) => {
   const [email, setEmail] = useState("");
@@ -22,17 +20,8 @@ export default (props) => {
   const [callDate, setCallDate] = useState("");
   const [freeInfo, setFreeInfo] = useState("");
   const [validated, setValidated] = useState(false);
-  // const [keyD, setKeyD] = useState("");
 
-  // console.log(email, firstName, lastName, phoneNumber);
-  // console.log(firstName, "fn")
-  // console.log(gender, "gender");
-  // console.log(age, "age");
-  // console.log(goals, "goal");
-  // console.log(callDate, "call date");
-
-  // console.log(freeInfo, "free info");
-
+  const { addTrainer } = useTrainerrequest();
   function handleChecks(e) {
     if (e.target.checked) {
       setGoals([...goals, e.target.value]);
@@ -43,19 +32,14 @@ export default (props) => {
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log(e.currentTarget.checkValidity(), "checkllll");
+
     if (e.currentTarget.checkValidity() === false) {
       setValidated(true);
       e.stopPropagation();
       setValidated(false);
     }
-    setValidated(true)
-    // else
-    // {
-    //   
-    // }
+    setValidated(true);
 
-    console.log(validated);
     const formData = {
       firstName,
       lastName,
@@ -67,23 +51,11 @@ export default (props) => {
       callDate,
       freeInfo,
     };
-    // console.log(formData, "formData");
-    // setFirstName("");
-    // setLastName("");
-    // setEmail("");
-    // setPhoneNumber("");
-    // setGender("");
-    // setAge("");
-    // setGoals([]); /////// clean
-    // setCallDate("");
-    // setFreeInfo("");
 
-    // console.log(props, "props");
-    console.log(validated, "var validated")
     if (e.currentTarget.checkValidity() === true) {
+      addTrainer(formData);
       props.history.push("/thx");
     }
-    //
   }
 
   return (
@@ -98,7 +70,7 @@ export default (props) => {
                 <Form.Row>
                   {["First Name", "Last Name", "Email", "Phone"].map(
                     (tx, i) => (
-                      <Form.Group as={Col} md="6" key={tx + i} >
+                      <Form.Group as={Col} md="6" key={tx + i}>
                         <Form.Label>{tx}</Form.Label>
                         <Form.Control
                           required
@@ -133,13 +105,11 @@ export default (props) => {
                   )}
                 </Form.Row>
 
-                {/* <hr /> */}
                 <Form.Row className="mt-1">
                   <Form.Group as={Col} sm="6">
                     <h4 className="mb-3">Gender</h4>
                     {["Male", "Female", "Other"].map((ge, i) => (
                       <Form.Check
-                        
                         inline
                         type="radio"
                         key={i + "r"}
@@ -153,13 +123,11 @@ export default (props) => {
                   </Form.Group>
                   <Form.Group as={Col} md="3" nogutters="true" className="mb-0">
                     <DropdownButton
-                      
                       id="dropdown-basic-button"
                       title={
                         age !== "" ? "Age range: " + age : "What's your age"
                       }
                       variant="light"
-                      // value={age}
                       onSelect={(e) => setAge(e)}
                     >
                       {["18-24", "25-34", "35-44", "45-54", "55+"].map(
@@ -175,7 +143,7 @@ export default (props) => {
                 <hr />
                 <h4 className="mb-3">What are your goals?</h4>
                 <Form.Row>
-                  <Form.Group as={Col} sm="6" >
+                  <Form.Group as={Col} sm="6">
                     {[
                       "Get in Shape",
                       "Lose Weight",
@@ -183,7 +151,6 @@ export default (props) => {
                       "Get Stronger",
                     ].map((goal, i) => (
                       <Form.Check
-                        
                         type="checkbox"
                         key={i + "r"}
                         name="goalCheck"
@@ -194,7 +161,7 @@ export default (props) => {
                       />
                     ))}
                   </Form.Group>
-                  <Form.Group as={Col} sm="6" >
+                  <Form.Group as={Col} sm="6">
                     {[
                       "Eat Double",
                       "Fitness Competition",
@@ -202,14 +169,12 @@ export default (props) => {
                       "American Ninja Warrior",
                     ].map((goal, i) => (
                       <Form.Check
-                        
                         type="checkbox"
                         key={i + "r"}
                         name="goalCheck"
                         id={`check-${i + 4}`}
                         label={goal}
                         value={goal}
-                        // onChange={(e) => console.log(e.target.checked)}
                         onChange={handleChecks}
                       />
                     ))}
@@ -217,7 +182,7 @@ export default (props) => {
                 </Form.Row>
                 <hr />
                 <Form.Row>
-                  <Form.Group as={Col} md="12" >
+                  <Form.Group as={Col} md="12">
                     <h4 className="mb-3">
                       What day would you like us to contact you?
                     </h4>
@@ -230,24 +195,22 @@ export default (props) => {
                       className="border border-dark"
                     />
                     <Form.Control.Feedback type="invalid">
-                          Date is required.
-                        </Form.Control.Feedback>
+                      Date is required.
+                    </Form.Control.Feedback>
                   </Form.Group>
                 </Form.Row>
                 <hr />
                 <Form.Row>
-                  <Form.Group as={Col} md="12" >
+                  <Form.Group as={Col} md="12">
                     <h4 className="mb-3">
                       Tell us a little bit more about yourself
                     </h4>
 
                     <Form.Control
-                      
                       as="textarea"
                       rows="3"
                       name="txtareafree"
                       value={freeInfo}
-                      // onKeyDown={e=>setKeyD(e.key)}
                       onChange={(e) => setFreeInfo(e.target.value)}
                       className="border border-dark"
                     />

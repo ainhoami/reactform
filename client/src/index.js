@@ -6,12 +6,6 @@ import * as serviceWorker from "./serviceWorker"
 import { Provider } from "react-redux"
 import store from "./redux/store"
 
-// ReactDOM.render(
-//   <Provider store={store}>
-//     <App />
-//   </Provider>,
-//   document.getElementById("root")
-// )
 
 const Main = props => {
   return <Provider store={store}>{props.children}</Provider>

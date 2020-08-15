@@ -1,1 +1,1 @@
-export { useExample } from "../redux/ducks/example"
+export { useTrainerrequest } from "../redux/ducks/TrainerRequest"

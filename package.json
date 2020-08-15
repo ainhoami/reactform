@@ -2,11 +2,11 @@
   "name": "reactform",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "client": "cd client && npm start",
     "server": "cd server && npm start",
-    "start": "concurrently \"npm run client\" \"npm run server\""
+    "dev": "concurrently \"npm run client\" \"npm run server\""
   },
   "author": "",
   "license": "ISC",
@@ -16,6 +16,7 @@
   "homepage": "",
   "dependencies": {
     "concurrently": "^5.1.0",
+    "moment": "^2.27.0",
     "validator": "^13.1.1"
   },
   "boilerplate": {
