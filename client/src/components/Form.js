@@ -29,47 +29,51 @@ export default (props) => {
   // console.log(goals, "goal");
   // console.log(callDate, "call date");
 
-  console.log(freeInfo, "free info")
+  // console.log(freeInfo, "free info");
 
   function handleChecks(e) {
-    
     if (e.target.checked) {
       setGoals([...goals, e.target.value]);
     } else {
       setGoals(goals.filter((filt) => filt !== e.target.value));
       // console.log(goals.filter((go) => go !== e.target.value));
-      // 
+      //
     }
   }
 
+function handleSubmit(e){
+  e.preventDefault()
+
+  const formData={
+    firstName,
+    lastName,
+    email,
+    phoneNumber,
+    gender,
+    age,
+    goals,
+    callDate,
+    freeInfo
+  }
+  console.log(formData, "formData")
+}
+
   return (
     <>
-      {/* <div className="ProfloginHouseContainerP">
-        <FontAwesomeIcon icon="coffee" />
-        <FontAwesomeIcon icon={["fab", "apple"]} />
-        <FontAwesomeIcon icon={["fas", "arrow-circle-right"]} />
-        holi
-      </div>
-      <form>
-        <input type="text" />
-        <Button variant="primary">Primary</Button> <br />
-        <Button variant="outline-success">Success</Button>{" "}
-      </form> */}
-
       <Container fluid className="bgimage bg-dark position-sticky">
-        <Container className="bg-white pt-5 min-vh-100 ct2 border border-bottom-0 border-top-0 ">
+        <Container className="bg-white pt-2 min-vh-100 ct2 border border-bottom-0 border-top-0 ">
           <Row className="justify-content-md-center ">
-            <h1 className="mb-5">Personal Trainer Request</h1>
+            <h1 className="pb-2">Personal Trainer Request</h1>
             <Col lg="9">
-              <Form>
-                <h4 className="mb-3">Contact Information</h4>
+              <Form onSubmit={handleSubmit}>
+                <h4 className="mb-2">Personal Information</h4>
                 <Form.Row>
                   {["First Name", "Last Name", "Email", "Phone"].map(
                     (tx, i) => (
                       <Form.Group as={Col} md="6" key={tx + i}>
-                        <Form.Label >{tx}</Form.Label>
+                        <Form.Label>{tx}</Form.Label>
                         <Form.Control
-                        className="border border-dark"
+                          className="border border-dark"
                           type="text"
                           placeholder={tx}
                           name={tx}
@@ -91,14 +95,13 @@ export default (props) => {
                               ? setEmail(e.target.value)
                               : setPhoneNumber(e.target.value)
                           }
-                          
                         />
                       </Form.Group>
                     )
                   )}
                 </Form.Row>
 
-                <hr />
+                {/* <hr /> */}
                 <Form.Row className="mt-1">
                   <Form.Group as={Col} sm="6">
                     <h4 className="mb-3">Gender</h4>
@@ -156,8 +159,6 @@ export default (props) => {
                         label={goal}
                         value={goal}
                         onChange={handleChecks}
-                       
-                      
                       />
                     ))}
                   </Form.Group>
@@ -184,9 +185,9 @@ export default (props) => {
                 <hr />
                 <Form.Row>
                   <Form.Group as={Col} md="12">
-                  <h4 className="mb-3">
+                    <h4 className="mb-3">
                       When would you like us to contact you?
-                   </h4>
+                    </h4>
                     <Form.Control
                       type="date"
                       name="firstName"
@@ -199,25 +200,31 @@ export default (props) => {
                 <hr />
                 <Form.Row>
                   <Form.Group as={Col} md="12">
-                  <h4 className="mb-3">
+                    <h4 className="mb-3">
                       Tell us a little bit more about yourself
-                  </h4>
-                  
-                    <Form.Control 
-                          as="textarea"
-                          rows="3"
-                          name="txtareafree"
-                          value={freeInfo}
-                          // onKeyDown={e=>setKeyD(e.key)}
-                          onChange={e=>setFreeInfo(e.target.value)}
-                          className="border border-dark"
-                      />
+                    </h4>
+
+                    <Form.Control
+                      as="textarea"
+                      rows="3"
+                      name="txtareafree"
+                      value={freeInfo}
+                      // onKeyDown={e=>setKeyD(e.key)}
+                      onChange={(e) => setFreeInfo(e.target.value)}
+                      className="border border-dark"
+                    />
                   </Form.Group>
                 </Form.Row>
-
-                
+                <Button
+                 variant="purple"
+                  block
+                  size="lg"
+                  type="submit"
+                  
+                >
+                  Submit
+                </Button>
               </Form>
-            
             </Col>
           </Row>
         </Container>

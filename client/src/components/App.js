@@ -4,8 +4,9 @@ import {BrowserRouter as Router, Route} from "react-router-dom"
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fab } from '@fortawesome/free-brands-svg-icons'
 import { faCheckSquare, faCoffee, faArrowCircleRight} from '@fortawesome/free-solid-svg-icons'
-import "../styles/form.css"
 import 'bootstrap/dist/css/bootstrap.min.css';
+import "../styles/form.css"
+
 import Form from "./Form"
 
 library.add(fab, faCheckSquare, faCoffee, faArrowCircleRight)
