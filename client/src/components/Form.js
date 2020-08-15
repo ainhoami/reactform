@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Redirect } from "react-router-dom";
 // import { useAdmins} from '../hooks'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import validator from "validator";
@@ -20,6 +21,7 @@ export default (props) => {
   const [goals, setGoals] = useState([]);
   const [callDate, setCallDate] = useState("");
   const [freeInfo, setFreeInfo] = useState("");
+  const [validated, setValidated] = useState(false);
   // const [keyD, setKeyD] = useState("");
 
   // console.log(email, firstName, lastName, phoneNumber);
@@ -36,27 +38,53 @@ export default (props) => {
       setGoals([...goals, e.target.value]);
     } else {
       setGoals(goals.filter((filt) => filt !== e.target.value));
-      // console.log(goals.filter((go) => go !== e.target.value));
-      //
     }
   }
 
-function handleSubmit(e){
-  e.preventDefault()
+  function handleSubmit(e) {
+    e.preventDefault();
+    console.log(e.currentTarget.checkValidity(), "checkllll");
+    if (e.currentTarget.checkValidity() === false) {
+      setValidated(true);
+      e.stopPropagation();
+      setValidated(false);
+    }
+    setValidated(true)
+    // else
+    // {
+    //   
+    // }
 
-  const formData={
-    firstName,
-    lastName,
-    email,
-    phoneNumber,
-    gender,
-    age,
-    goals,
-    callDate,
-    freeInfo
+    console.log(validated);
+    const formData = {
+      firstName,
+      lastName,
+      email,
+      phoneNumber,
+      gender,
+      age,
+      goals,
+      callDate,
+      freeInfo,
+    };
+    // console.log(formData, "formData");
+    // setFirstName("");
+    // setLastName("");
+    // setEmail("");
+    // setPhoneNumber("");
+    // setGender("");
+    // setAge("");
+    // setGoals([]); /////// clean
+    // setCallDate("");
+    // setFreeInfo("");
+
+    // console.log(props, "props");
+    console.log(validated, "var validated")
+    if (e.currentTarget.checkValidity() === true) {
+      props.history.push("/thx");
+    }
+    //
   }
-  console.log(formData, "formData")
-}
 
   return (
     <>
@@ -65,14 +93,15 @@ function handleSubmit(e){
           <Row className="justify-content-md-center ">
             <h1 className="pb-2">Personal Trainer Request</h1>
             <Col lg="9">
-              <Form onSubmit={handleSubmit}>
+              <Form noValidate validated={validated} onSubmit={handleSubmit}>
                 <h4 className="mb-2">Personal Information</h4>
                 <Form.Row>
                   {["First Name", "Last Name", "Email", "Phone"].map(
                     (tx, i) => (
-                      <Form.Group as={Col} md="6" key={tx + i}>
+                      <Form.Group as={Col} md="6" key={tx + i} >
                         <Form.Label>{tx}</Form.Label>
                         <Form.Control
+                          required
                           className="border border-dark"
                           type="text"
                           placeholder={tx}
@@ -96,6 +125,9 @@ function handleSubmit(e){
                               : setPhoneNumber(e.target.value)
                           }
                         />
+                        <Form.Control.Feedback type="invalid">
+                          This field is required.
+                        </Form.Control.Feedback>
                       </Form.Group>
                     )
                   )}
@@ -107,6 +139,7 @@ function handleSubmit(e){
                     <h4 className="mb-3">Gender</h4>
                     {["Male", "Female", "Other"].map((ge, i) => (
                       <Form.Check
+                        
                         inline
                         type="radio"
                         key={i + "r"}
@@ -120,6 +153,7 @@ function handleSubmit(e){
                   </Form.Group>
                   <Form.Group as={Col} md="3" nogutters="true" className="mb-0">
                     <DropdownButton
+                      
                       id="dropdown-basic-button"
                       title={
                         age !== "" ? "Age range: " + age : "What's your age"
@@ -137,14 +171,11 @@ function handleSubmit(e){
                       )}
                     </DropdownButton>
                   </Form.Group>
-                  {/* <Form.Group as={Col} md="3">
-                    <p className="sm-mt-0 mt-1">Range Selected: {age}</p>
-                  </Form.Group> */}
                 </Form.Row>
                 <hr />
                 <h4 className="mb-3">What are your goals?</h4>
                 <Form.Row>
-                  <Form.Group as={Col} sm="6">
+                  <Form.Group as={Col} sm="6" >
                     {[
                       "Get in Shape",
                       "Lose Weight",
@@ -152,6 +183,7 @@ function handleSubmit(e){
                       "Get Stronger",
                     ].map((goal, i) => (
                       <Form.Check
+                        
                         type="checkbox"
                         key={i + "r"}
                         name="goalCheck"
@@ -162,7 +194,7 @@ function handleSubmit(e){
                       />
                     ))}
                   </Form.Group>
-                  <Form.Group as={Col} sm="6">
+                  <Form.Group as={Col} sm="6" >
                     {[
                       "Eat Double",
                       "Fitness Competition",
@@ -170,13 +202,14 @@ function handleSubmit(e){
                       "American Ninja Warrior",
                     ].map((goal, i) => (
                       <Form.Check
+                        
                         type="checkbox"
                         key={i + "r"}
                         name="goalCheck"
                         id={`check-${i + 4}`}
                         label={goal}
                         value={goal}
-                        onChange={(e) => console.log(e.target.checked)}
+                        // onChange={(e) => console.log(e.target.checked)}
                         onChange={handleChecks}
                       />
                     ))}
@@ -184,27 +217,32 @@ function handleSubmit(e){
                 </Form.Row>
                 <hr />
                 <Form.Row>
-                  <Form.Group as={Col} md="12">
+                  <Form.Group as={Col} md="12" >
                     <h4 className="mb-3">
-                      When would you like us to contact you?
+                      What day would you like us to contact you?
                     </h4>
                     <Form.Control
+                      required
                       type="date"
                       name="firstName"
                       value={callDate}
                       onChange={(e) => setCallDate(e.target.value)}
                       className="border border-dark"
                     />
+                    <Form.Control.Feedback type="invalid">
+                          Date is required.
+                        </Form.Control.Feedback>
                   </Form.Group>
                 </Form.Row>
                 <hr />
                 <Form.Row>
-                  <Form.Group as={Col} md="12">
+                  <Form.Group as={Col} md="12" >
                     <h4 className="mb-3">
                       Tell us a little bit more about yourself
                     </h4>
 
                     <Form.Control
+                      
                       as="textarea"
                       rows="3"
                       name="txtareafree"
@@ -215,13 +253,7 @@ function handleSubmit(e){
                     />
                   </Form.Group>
                 </Form.Row>
-                <Button
-                 variant="purple"
-                  block
-                  size="lg"
-                  type="submit"
-                  
-                >
+                <Button variant="purple" block size="lg" type="submit">
                   Submit
                 </Button>
               </Form>

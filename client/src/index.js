@@ -6,10 +6,21 @@ import * as serviceWorker from "./serviceWorker"
 import { Provider } from "react-redux"
 import store from "./redux/store"
 
+// ReactDOM.render(
+//   <Provider store={store}>
+//     <App />
+//   </Provider>,
+//   document.getElementById("root")
+// )
+
+const Main = props => {
+  return <Provider store={store}>{props.children}</Provider>
+}
+
 ReactDOM.render(
-  <Provider store={store}>
+  <Main>
     <App />
-  </Provider>,
+  </Main>,
   document.getElementById("root")
 )
 
@@ -17,3 +28,4 @@ ReactDOM.render(
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister()
+export default Main

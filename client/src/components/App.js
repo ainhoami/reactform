@@ -8,6 +8,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import "../styles/form.css"
 
 import Form from "./Form"
+import Thanks from "./Thanks"
 
 library.add(fab, faCheckSquare, faCoffee, faArrowCircleRight)
 
@@ -16,6 +17,7 @@ export default function App() {
   return (
     <Router>
       <Route exact path="/" component={Form} />
+      <Route exact path="/thx" component={Thanks} />
     </Router>
   )
 }
