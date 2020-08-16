@@ -14,13 +14,3 @@ To read the data from the database: http://localhost:3000/super-secret-url/reque
 
 ## This Form is
 Front end React based application, with Express and mongodb for the server side.
-
-
-
-
-
-
-
-
-
-git 
