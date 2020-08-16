@@ -1,14 +1,12 @@
 ## Survey Form
 
 ## How to start the App
-First, install all the dependencies.
+First, clone or download the project and install all the dependencies. From the root folder of the project:
 - npm install
-- cd server 
-- npm install
-- cd client 
-- npm install
+- cd server and then npm install
+- cd client and then npm install
 
-To start the application: run npm dev from the root folder of the project, will start both front end and back end.
+To start the application: go to the root folder of the project and in the command line write npm run dev, will start both front end and back end.
 Then, it will display on http://localhost:3000/
 To read the data from the database: http://localhost:3000/super-secret-url/requests
 
